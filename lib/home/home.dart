@@ -7,17 +7,23 @@ import '../widgets/input.dart';
 import '../services/APIManager.dart';
 import '../model/LoginResponse.dart';
 import '../utils/Dialog.dart';
+import 'tabNavigator.dart';
 
 class Home extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   login(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TabNavigator()),
+    );
+    return;
     showProgress(context);
     Future<LoginResponse> response =
         doLogin(emailController.text, passwordController.text);
     response.then((res) {
-      dismissProgress();
+      dismissProgress(context);
       if (res.error != null) {
         showMessage(context, "Error", res.error.error);
       }
@@ -46,11 +52,11 @@ class Home extends StatelessWidget {
                       ),
                       Input(
                         hint: "Email address",
-                        controller: emailController,
+                        controller: emailController
                       ),
                       Input(
                         hint: "Email address",
-                        controller: passwordController,
+                        controller: passwordController
                       ),
                       SocialAuth,
                     ]),

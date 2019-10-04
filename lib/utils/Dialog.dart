@@ -28,11 +28,36 @@ showMessage(context, title, message) {
 var dialog;
 
 showProgress(context) {
-  dialog = showProgressDialog(context: context, loadingText: "Loading");
+  //dialog = showProgressDialog(context: context, loadingText: "Loading");
+  AlertDialog alert = AlertDialog(
+    content: Container(
+      child: Row(
+        children: <Widget>[
+          CircularProgressIndicator(
+              backgroundColor: Colors.cyan[400],
+              valueColor: AlwaysStoppedAnimation(Colors.cyan[600])),
+          Container(
+            margin: EdgeInsets.only(left: 20),
+            child: Text("Loading...", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+          )
+        ],
+      ),
+    ),
+  );
+  dialog = showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      return WillPopScope(
+          onWillPop: () {},
+        child: alert,
+      );
+    },
+  );
 }
 
-dismissProgress() {
+dismissProgress(context) {
   if (dialog != null) {
-    dialog.dismiss(showAnim: true);
+    Navigator.of(context, rootNavigator: true).pop();
   }
 }
