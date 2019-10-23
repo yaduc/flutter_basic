@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TabNavigator extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
@@ -76,11 +77,7 @@ class MainScreen extends StatelessWidget {
         body: Container(
           child: InkWell(
               onTap: () {
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(builder: (context) => DetailScreen()),
-//                );
-                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                Navigator.of(context, rootNavigator: true).push(CupertinoPageRoute(
                   builder: (context) => DetailScreen()),
                 );
               },
